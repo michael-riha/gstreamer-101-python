@@ -63,4 +63,4 @@ And on the other end, I use `ffmpeg` wo receive the video on the host.
 
 ![Alt Text](https://media.giphy.com/media/3o7TKUM3IgJBX2as9O/giphy.gif)
 
-# Jump to the `readme.md` inside of [/examples](https://github.com/michael-riha/gstreamer-101-python/blob/master/examples/)
+# Jump to the `readme.md` inside of [/examples](https://github.com/michael-riha/gstreamer-101-python/tree/master/examples)
