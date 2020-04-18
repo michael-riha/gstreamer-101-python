@@ -27,10 +27,16 @@ libgirepository1.0-dev \
 libcairo2-dev \
 python3
 
+COPY installs /tmp
+RUN sh /tmp/install-python-utils.sh
+
 #for testing live stream output
 #https://docs.docker.com/engine/reference/builder/ default is TCP!
 EXPOSE 7001/tcp
 EXPOSE 7001/udp
+
+#for SRT
+EXPOSE 2088/udp
 
 #ENTRYPOINT "/bin/bash"
 CMD /bin/bash

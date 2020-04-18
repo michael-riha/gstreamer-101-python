@@ -58,7 +58,10 @@ And on the other end, I use `ffmpeg` wo receive the video on the host.
 
 ## Running the `Docker`-Image
 
-`docker run -it $PWD/examples:/opt riha/riha/gstreamer-101:latest`
+`docker run -it $PWD/examples:/opt -p 7001:7001 riha/gstreamer-101:latest`
+
+_for later SRT examples (`example2.py`)_
+`docker run -it $PWD/examples:/opt -p 7001:7001 -p 2088:2088/udp riha/gstreamer-101:latest`
 
 
 ![Alt Text](https://media.giphy.com/media/3o7TKUM3IgJBX2as9O/giphy.gif)
