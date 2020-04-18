@@ -2,6 +2,7 @@
 _This is a collection of all the examples I created in 2020, during my learning phase with GStreamer 1.0_
 
 <br>
+
 As everybody I started by using the gstreamer cli `gst-launch-1.0` and since I wanted to build plugins as well and not pollut my MacOS, with different versions of `gstreamer` and others, I decided to use `Docker`.
 
 ## Docker Container to run `gstreamer`
@@ -11,6 +12,8 @@ I include the `.dockerfile` I built based on `ubuntu` (`prev 18.04` but I change
 What made this a bit difficult is that for simple `gstreamer` pipelines most people use `xvimagesink` or `glimagesink` or ... [ Platform-specific elements](https://gstreamer.freedesktop.org/documentation/tutorials/basic/platform-specific-elements.html?gi-language=python) to direktcly test and output your pipeline.
 
 This is also possible with `docker` as you can use `XWindow` (in my case with XQuartz on MacOS) but it is not very handy, at least this is my impression.
+
+---
 
 So what I do most of the time, is using the [`tcpserversink`](https://gstreamer.freedesktop.org/documentation/tcp/tcpserversink.html?gi-language=python#tcpserversink-page) sending via TCP-port from the `container`.
 
@@ -52,6 +55,8 @@ And on the other end, I use `ffmpeg` wo receive the video on the host.
       ENCODER         : x264
     ```
 
+---
+
 ## Building the `Docker`-Image
 
 `docker build --tag=riha/gstreamer-101 .`
@@ -59,6 +64,8 @@ And on the other end, I use `ffmpeg` wo receive the video on the host.
 ## Running the `Docker`-Image
 
 `docker run -it $PWD/examples:/opt -p 7001:7001 riha/gstreamer-101:latest`
+
+---
 
 _for later SRT examples (`example2.py`)_
 `docker run -it $PWD/examples:/opt -p 7001:7001 -p 2088:2088/udp riha/gstreamer-101:latest`

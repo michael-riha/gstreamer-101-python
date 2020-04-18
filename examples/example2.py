@@ -58,6 +58,7 @@ def main():
 
   x264enc = Gst.ElementFactory.make('x264enc', None)
   x264enc.set_property("byte-stream", True)
+  x264enc.set_property("tune", "zerolatency")
   pipeline.add(x264enc)
 
   h264parse = Gst.ElementFactory.make('h264parse', None)
