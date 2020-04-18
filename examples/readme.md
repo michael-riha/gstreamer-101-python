@@ -103,6 +103,40 @@ Yes, it is in the `installs/install-python-utils.sh`
 
 ---
 
+---
+
+## `example2_with_audio.py`
+
+In `example2.py` we use a `decodebin` which has so called `sometimes`-pads to which you can `link` after the `decodebin.connect("pad-added", ...)`-callback is fired.
+
+What we do in this example, is to extend `example2.py` to also put audio in the mix!
+This means that the `pad-added`-callback is triggered twice (once for audio, once for video) - which it already did but we just ignored it in `example2.py`.
+
+So we extend our pipeline to a bracnh for audio after the `decodebin` added both (audio & video) pads to us, which includes an AAC-encoder [`avenc_aac`](https://gstreamer.freedesktop.org/documentation/libav/avenc_aac.html?gi-language=python#avenc_aac).
+
+Additonally we need this branch of our pipeline to also be muxed by the `matroskamux`.
+
+Which means we need to use the `request`-pads now as well.
+This is how you do this:
+
+```python
+video_pad= matroskamux.get_request_pad("video_%u")
+audio_pad= matroskamux.get_request_pad("audio_%u")
+```
+
+by the end of the two stram-branches (audio & video) you need to connect to them to mux audio & video together.
+
+e.g for a `queue`-element
+
+```python
+queue_video.get_static_pad("src").link(video_pad) 
+queue_audio.get_static_pad("src").link(audio_pad) 
+```
+
+More about this in the [Gstreamer Docs](https://gstreamer.freedesktop.org/documentation/application-development/basics/pads.html?gi-language=python)
+
+---
+
 ## `example3.py`
 
 Next I wanted to get real ingested video into this pipeline. As everybody it switching from `rtmp` to `srt` on a professional base, I wanted to feed the pipeline with an external SRT-stream, I create with `ffmpeg`, an put this one into the mix.
